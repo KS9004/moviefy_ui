@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.dark
       ),
-      home: HomeScreen()
+      home: Scaffold(body: HomeScreen())
     );
   }
 }
