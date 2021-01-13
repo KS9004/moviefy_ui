@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moviefy_ui/moviedata.dart';
+import 'package:moviefy_ui/widgets/scrollabel_movie_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -39,12 +40,12 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         scrollDirection:Axis.horizontal,
         children:
-          featureMovies.map((_movie){
+          featuredMovies.map((_movie){
             return Container (
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image:AssetImage(_movie.cover.url),
+                  image:AssetImage(_movie.coverImage.url),
                 ),
               ),
             );
@@ -83,7 +84,12 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           _topBarWidget(),
           SizedBox(height: _deviceHeight * 0.13,),
-          _FeaturedMoviesInfoWidget()
+          _FeaturedMoviesInfoWidget(),
+          Padding(
+            padding:  EdgeInsets.symmetric(vertical: _deviceHeight * 0.01),
+            child: ScrollableMovieWidget(_deviceHeight * 0.24, _deviceWidth , true, movies),
+          ),
+          _featuredMovieBanner()
         ],
       ),
     );
@@ -123,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(featureMovies[_selectedMovie].title,
+          Text(featuredMovies[_selectedMovie].title,
           maxLines: 2,
           style: TextStyle(
             color: Colors.white,
@@ -134,8 +140,8 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: featureMovies.map((_movie){
-              bool _isActive = _movie.title == featureMovies[_selectedMovie].title;
+            children: featuredMovies.map((_movie){
+              bool _isActive = _movie.title == featuredMovies[_selectedMovie].title;
               double _circleRadius = _deviceHeight * 0.004;
               return Container(
                 margin: EdgeInsets.only(right: _deviceWidth * 0.015),
@@ -149,6 +155,19 @@ class _HomeScreenState extends State<HomeScreen> {
             }).toList(),
           )
         ],
+      ),
+    );
+  }
+  Widget _featuredMovieBanner(){
+    return Container(
+      height: _deviceHeight * 0.17,
+      width: _deviceWidth,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        image: DecorationImage(
+          fit: BoxFit.cover,
+          image: AssetImage(featuredMovies[3].coverImage.url)
+        )
       ),
     );
   }
