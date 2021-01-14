@@ -32,14 +32,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   Widget _featuredMovieWidget(){
     return SizedBox(height: _deviceHeight*0.50,width:_deviceWidth ,
-      child: PageView(
-        onPageChanged: (_index){
-          setState(() {
-            _selectedMovie = _index;
-          });
-        },
-        scrollDirection:Axis.horizontal,
-        children:
+        child: PageView(
+          onPageChanged: (_index){
+            setState(() {
+              _selectedMovie = _index;
+            });
+          },
+          scrollDirection:Axis.horizontal,
+          children:
           featuredMovies.map((_movie){
             return Container (
               decoration: BoxDecoration(
@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           }).toList(),
 
-      )
+        )
     );
   }
   Widget _gradientWidget(){
@@ -61,13 +61,13 @@ class _HomeScreenState extends State<HomeScreen> {
         height: _deviceHeight*0.80,
         width: _deviceWidth,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color.fromRGBO(35, 45, 59, 1.0),
-            Colors.transparent],
-            stops: [0.65,1.0],
-            begin: Alignment.bottomCenter,
-            end: Alignment.topCenter,
-          )
+            gradient: LinearGradient(
+              colors: [Color.fromRGBO(35, 45, 59, 1.0),
+                Colors.transparent],
+              stops: [0.65,1.0],
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+            )
         ),
       ),
     );
@@ -87,9 +87,10 @@ class _HomeScreenState extends State<HomeScreen> {
           _FeaturedMoviesInfoWidget(),
           Padding(
             padding:  EdgeInsets.symmetric(vertical: _deviceHeight * 0.01),
-            child: ScrollableMovieWidget(_deviceHeight * 0.24, _deviceWidth , true, movies),
+            child: ScrollableMovieWidget(_deviceHeight * 0.22, _deviceWidth , true, movies),
           ),
-          _featuredMovieBanner()
+          _featuredMovieBanner(),
+          ScrollableMovieWidget(_deviceHeight * 0.20, _deviceWidth, false ,movies2)
         ],
       ),
     );
@@ -103,8 +104,8 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Icon(Icons.menu,
-          color: Colors.white,
-          size: 30,),
+            color: Colors.white,
+            size: 30,),
           Row(
             children: [
               Icon(Icons.search,
@@ -130,11 +131,11 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(featuredMovies[_selectedMovie].title,
-          maxLines: 2,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: _deviceHeight*0.040
-          ),),
+            maxLines: 2,
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: _deviceHeight*0.040
+            ),),
           SizedBox(height: _deviceHeight * 0.01,),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -148,8 +149,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: _circleRadius * 2,
                 width: _circleRadius * 2,
                 decoration: BoxDecoration(
-                  color: _isActive ? Colors.grey:Colors.green,
-                  borderRadius: BorderRadius.circular(100)
+                    color: _isActive ? Colors.grey:Colors.green,
+                    borderRadius: BorderRadius.circular(100)
                 ),
               );
             }).toList(),
@@ -163,11 +164,11 @@ class _HomeScreenState extends State<HomeScreen> {
       height: _deviceHeight * 0.17,
       width: _deviceWidth,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: AssetImage(featuredMovies[3].coverImage.url)
-        )
+          borderRadius: BorderRadius.circular(10),
+          image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage(featuredMovies[3].coverImage.url)
+          )
       ),
     );
   }

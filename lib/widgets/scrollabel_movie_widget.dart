@@ -37,12 +37,13 @@ class ScrollableMovieWidget extends StatelessWidget {
                       )
                   ),
                 ),
-                Text(_movie.title,
-                maxLines: 2,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: _height*0.08
-                ),)
+                _showTitle ? Text(_movie.title,
+                  maxLines: 2,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: _height*0.08
+                  ),
+                ):Container(),
               ],
 
             ),
